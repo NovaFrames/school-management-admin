@@ -227,7 +227,7 @@ export default function LoginPage({ onLogin }: Props) {
 
           <Divider sx={{ my: 4 }} />
           <Typography variant="caption" color="text.disabled" display="block" textAlign="center">
-            API base: {import.meta.env.VITE_BASE_URL || 'http://localhost:5001/api'}
+            API base: {process.env.BASE_URL || 'http://localhost:5001/api'}
           </Typography>
         </Box>
       </Box>

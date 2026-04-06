@@ -1,6 +1,6 @@
 import { clearAuthSession, getAccessToken } from './session';
 
-const API_BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:5001/api';
+const API_BASE_URL = process.env.BASE_URL || 'http://localhost:5001/api';
 
 function toApiUrl(path: string): string {
   if (path.startsWith('http://') || path.startsWith('https://')) return path;

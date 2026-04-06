@@ -11,6 +11,7 @@ import {
 import {
   ApartmentRounded,
   AdminPanelSettingsRounded,
+  AppsRounded,
   LogoutRounded,
   MenuOpenRounded,
   MenuRounded,
@@ -41,6 +42,7 @@ export default function Sidebar({ user, onLogout }: Props) {
 
   const activeOrganizations = pathname === '/organizations';
   const activeSuperAdmin = pathname === '/super-admin/create';
+  const activePortalManagement = pathname === '/portal-management';
 
   return (
     <Box
@@ -165,6 +167,41 @@ export default function Sidebar({ user, onLogout }: Props) {
             {!collapsed && (
               <Typography sx={{ color: activeSuperAdmin ? '#fff' : 'rgba(255,255,255,0.75)', fontWeight: activeSuperAdmin ? 700 : 500, fontSize: 13.5 }}>
                 Create Super Admin
+              </Typography>
+            )}
+          </Stack>
+        </Tooltip>
+
+        <Tooltip title={collapsed ? 'Portal Management' : ''} placement="right" arrow>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1.5}
+            onClick={() => navigate('/portal-management')}
+            sx={{
+              mt: 1,
+              px: collapsed ? 0 : 1.5,
+              py: 1.1,
+              mx: collapsed ? 'auto' : 0,
+              width: collapsed ? 46 : '100%',
+              height: collapsed ? 46 : 'auto',
+              borderRadius: 2.5,
+              cursor: 'pointer',
+              justifyContent: collapsed ? 'center' : 'flex-start',
+              bgcolor: activePortalManagement ? 'rgba(255,255,255,0.15)' : 'transparent',
+              '&:hover': { bgcolor: activePortalManagement ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)' },
+            }}
+          >
+            <AppsRounded sx={{ color: activePortalManagement ? '#fff' : 'rgba(255,255,255,0.6)' }} />
+            {!collapsed && (
+              <Typography
+                sx={{
+                  color: activePortalManagement ? '#fff' : 'rgba(255,255,255,0.75)',
+                  fontWeight: activePortalManagement ? 700 : 500,
+                  fontSize: 13.5,
+                }}
+              >
+                Portal Management
               </Typography>
             )}
           </Stack>

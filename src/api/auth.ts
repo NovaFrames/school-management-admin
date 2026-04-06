@@ -7,11 +7,17 @@ import type {
 } from '../types/auth';
 import { requestJson } from './http';
 
+const REQUIRED_LOGIN_PORTAL = 'ORG_ADMIN_PORTAL';
+
 interface RawAuthResponse {
   token?: string;
   accessToken?: string;
   refreshToken?: string;
   refresh_token?: string;
+  portal?: string;
+  portals?: Array<{
+    portal_code?: string;
+  }>;
   role?: string;
   user?: Partial<User>;
   data?: {
@@ -19,6 +25,10 @@ interface RawAuthResponse {
     accessToken?: string;
     refreshToken?: string;
     refresh_token?: string;
+    portal?: string;
+    portals?: Array<{
+      portal_code?: string;
+    }>;
     role?: string;
     user?: Partial<User>;
   };
@@ -63,6 +73,12 @@ export async function loginUser(payload: LoginPayload): Promise<LoginResponse> {
     },
     false,
   );
+
+  const nested = raw.data ?? {};
+  const portal = String(raw.portal ?? nested.portal ?? raw.portals?.[0]?.portal_code ?? nested.portals?.[0]?.portal_code ?? '').trim();
+  if (portal !== REQUIRED_LOGIN_PORTAL) {
+    throw new Error('Invalid credentials');
+  }
 
   return normalizeAuthResponse(raw, payload.email);
 }

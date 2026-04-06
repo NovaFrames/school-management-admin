@@ -14,6 +14,7 @@ import type { User } from '../types/auth';
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   '/organizations': { title: 'Organizations', subtitle: 'Manage all organizations with full CRUD.' },
   '/super-admin/create': { title: 'Create Super Admin', subtitle: 'Create a super admin account from inside the web app.' },
+  '/portal-management': { title: 'Portal Management', subtitle: 'Manage portals and user portal access.' },
 };
 
 interface Props {
